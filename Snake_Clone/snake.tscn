@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://xtbysbhhe66m"]
+
+[ext_resource type="Script" path="res://player.cs" id="1_14kmo"]
+[ext_resource type="Texture2D" uid="uid://d10830hn8vgee" path="res://icon.svg" id="2_eif6s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_caoja"]
+
+[node name="Node2D" type="Node2D"]
+position = Vector2(578, 289)
+
+[node name="Background" type="ColorRect" parent="."]
+offset_left = -579.0
+offset_top = -289.0
+offset_right = 573.0
+offset_bottom = 357.0
+color = Color(0.0551535, 0.467489, 0.351076, 1)
+
+[node name="Snake" type="CharacterBody2D" parent="."]
+script = ExtResource("1_14kmo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Snake"]
+shape = SubResource("RectangleShape2D_caoja")
+
+[node name="Icon" type="Sprite2D" parent="Snake"]
+position = Vector2(-1, -2)
+texture = ExtResource("2_eif6s")
