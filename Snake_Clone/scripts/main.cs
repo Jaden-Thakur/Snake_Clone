@@ -9,7 +9,7 @@ using System;
 public partial class main : Node2D
 {
 		// game vars
-	int score= 0;
+	int score;
 	bool game_started = false;
 
 	// game variables
@@ -31,8 +31,8 @@ public partial class main : Node2D
 	
 	public void new_game() {
 		score = 1;
-		String score_label = GetNode<Label>("Background/Hud/Score").Text;
-		score_label = "SCORE: " + $"{score}";
+		Label ScoreText = GetNode<Label>("Background/Hud/Score"); 
+		ScoreText.Text = "SCORE: " + $"{score}";
 		move_direction = up;
 		can_move = true;
 		//generate_snake();
@@ -50,6 +50,11 @@ public partial class main : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		
+		float AMOUNT = 5;
+		if (Input.IsKeyPressed(Key.W)) {
+			GetNode<Label>("Background/Hud/Score").Text = "Test";
+		}
 	}
 }
 

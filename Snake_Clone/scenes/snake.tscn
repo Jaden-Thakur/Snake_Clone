@@ -16,3 +16,13 @@ texture = ExtResource("2_o6jkx")
 [node name="Hud" parent="Background" instance=ExtResource("3_84bhm")]
 
 [node name="Snake Segment" parent="." instance=ExtResource("4_eika4")]
+offset_left = 394.0
+offset_top = 144.0
+offset_right = 443.0
+offset_bottom = 189.0
+
+[node name="Snake Segment2" parent="." instance=ExtResource("4_eika4")]
+offset_left = 120.0
+offset_top = 148.0
+offset_right = 165.0
+offset_bottom = 193.0
