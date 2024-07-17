@@ -14,14 +14,14 @@ public partial class main : Node2D
 
 	// game variables
 	int cells = 20;
-	int cell_size = 50;
+	int cell_size = 45;
 	// snake vars
 	List<Vector2> old_data = new List<Vector2>();
 	List<Vector2> snake_data  = new List<Vector2>();
-	List<Node> snake = new List<Node>();
+	List<Panel> snake = new List<Panel>();
 
 	//movement vars
-	Vector2 start_pos = new Vector2(9, 9);
+	Vector2 start_pos = new Vector2(9, 7);
 	Vector2 up = new Vector2(0, -1);
 	Vector2 down = new Vector2(0, 1);
 	Vector2 left = new Vector2(-1, 0);
@@ -32,6 +32,8 @@ public partial class main : Node2D
 	[Export] public PackedScene snake_scene;
 	
 	public void new_game() {
+		
+		snake_scene = (PackedScene)GD.Load("res://scenes/snake_segment.tscn");
 		score = 0;
 		Label ScoreText = GetNode<Label>("Background/Hud/Score"); 
 		ScoreText.Text = "SCORE: " + $"{score}";
@@ -46,16 +48,19 @@ public partial class main : Node2D
 		snake.Clear();
 		
 		for(int i = 0; i < 3; i++) {
-			add_segment(start_pos + new Vector2(0,1));
+			//add_segment(start_pos + new Vector2(0,1));
+			Vector2 pos = new Vector2(start_pos[0],start_pos[1]+i+0.1f);
+			add_segment(pos);
 		}
 	}
 	
 	public void add_segment(Vector2 pos) {
 		snake_data.Add(pos);
-		Node SnakeSegment = snake_scene.Instantiate();
+		Panel SnakeSegment = (Panel)snake_scene.Instantiate();
 		SnakeSegment.Position = (pos * cell_size) + new Vector2(0, cell_size);
 		AddChild(SnakeSegment);
 		snake.Add(SnakeSegment);
+		GD.Print("works");
 	}
 
 

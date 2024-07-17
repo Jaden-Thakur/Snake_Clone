@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://xtbysbhhe66m"]
+[gd_scene load_steps=4 format=3 uid="uid://xtbysbhhe66m"]
 
 [ext_resource type="Script" path="res://scripts/main.cs" id="1_wumur"]
 [ext_resource type="Texture2D" uid="uid://3bi83enpdvgy" path="res://assets/bg.jpg" id="2_o6jkx"]
 [ext_resource type="PackedScene" uid="uid://blc57thcvl1sj" path="res://scenes/Hud.tscn" id="3_84bhm"]
-[ext_resource type="PackedScene" uid="uid://cyontra7phvam" path="res://scenes/snake_segment.tscn" id="4_eika4"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_wumur")
@@ -14,9 +13,3 @@ scale = Vector2(2, 2)
 texture = ExtResource("2_o6jkx")
 
 [node name="Hud" parent="Background" instance=ExtResource("3_84bhm")]
-
-[node name="Head" parent="." instance=ExtResource("4_eika4")]
-offset_left = 540.0
-offset_top = 320.0
-offset_right = 585.0
-offset_bottom = 365.0
