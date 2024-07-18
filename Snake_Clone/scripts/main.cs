@@ -29,17 +29,18 @@ public partial class main : Node2D
 	Vector2 move_direction;
 	bool can_move = true;
 	
-	[Export] public PackedScene snake_scene;
+	public PackedScene snake_scene;
+	public Timer MovementTimer;
 	
 	public void new_game() {
-		
 		snake_scene = (PackedScene)GD.Load("res://scenes/snake_segment.tscn");
 		score = 0;
-		Label ScoreText = GetNode<Label>("Background/Hud/Score"); 
+		Label ScoreText = GetNode<Label>("Hud/Score"); 
 		ScoreText.Text = "SCORE: " + $"{score}";
 		move_direction = up;
 		can_move = true;
 		generate_snake();
+		MovementTimer = GetNode<Timer>("MovementTimer");
 	} 
 	
 	public void generate_snake() {
@@ -60,25 +61,72 @@ public partial class main : Node2D
 		SnakeSegment.Position = (pos * cell_size) + new Vector2(0, cell_size);
 		AddChild(SnakeSegment);
 		snake.Add(SnakeSegment);
-		GD.Print("works");
+		GD.Print("reached");
 	}
 
-
+	public void start_game() {
+		game_started = true;
+		MovementTimer.Start();
+	}
+	
+	public void move_snake() {
+		if (can_move) {
+			if (Input.IsActionJustPressed("move_down") && move_direction != up) {
+				move_direction = down;
+				can_move = false;
+				if (!game_started) {
+					start_game();
+				}
+			}
+			if (Input.IsActionJustPressed("move_up") && move_direction != down) {
+				move_direction = up;
+				can_move = false;
+				if (!game_started) {
+					start_game();
+				}
+			}
+			if (Input.IsActionJustPressed("move_right") && move_direction != left) {
+				move_direction = right;
+				can_move = false;
+				if (!game_started) {
+					start_game();
+				}
+			}
+			if (Input.IsActionJustPressed("move_left") && move_direction != right) {
+				move_direction = left;
+				can_move = false;
+				if (!game_started) {
+					start_game();
+				}
+			}
+		}
+	}
 	// Called when the node enters the scene tree for the first time.
 	
 	
 	public override void _Ready()
 	{
 		new_game();
+		
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if (Input.IsKeyPressed(Key.W)) {
-			
-		}
+		move_snake();
+	}
+	
+	private void _on_movement_timer_timeout()
+	{
+		can_move = true;
+		
+		//old_data = [] + snake_data;
+		//snake_data[0] += move_direction;
+		//for (int i = 0; i < )
 	}
 }
+
+
+
 
 
